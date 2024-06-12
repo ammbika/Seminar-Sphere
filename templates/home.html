@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block nav_button %}
+    <a href="{{url_for('login')}}" class="login-btn">LogIn</a>  
+{% endblock %}
+
+{% block content %}
+    <h2>Welcome to the Home Page</h2>
+    <p>This is the content of the home page.</p>
+{% endblock %}
