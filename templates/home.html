@@ -5,6 +5,21 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Welcome to the Home Page</h2>
-    <p>This is the content of the home page.</p>
+    <h2>Events</h2>
+    <ul>
+        {% for event in events %}
+        <li>
+            <strong>Event Name:</strong> {{ event.event_name }}<br>
+            <strong>Start Date:</strong> {{ event.start_date }}<br>
+            <strong>End Date:</strong> {{ event.end_date }}<br>
+            <strong>Start Time:</strong> {{ event.start_time }}<br>
+            <strong>End Time:</strong> {{ event.end_time }}<br>
+            <strong>Location:</strong> {{ event.location }}<br>
+            <strong>Description:</strong> {{ event.description }}<br>
+            <br>
+        </li>
+        {% else %}
+        <li>No events found.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
