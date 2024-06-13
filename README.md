@@ -13,7 +13,7 @@ This is a simple Flask-based web application for managing events. Users can crea
 
 ## Prerequisites
 
-- Python 3.x
+- Python 3
 - Flask
 
 ## Set up
@@ -30,6 +30,7 @@ This is a simple Flask-based web application for managing events. Users can crea
 4. Activate the virtual environment:
     - <env_name>\Scripts\activate (For windows)
     - source <env_name>/bin/activate
+    - To deactivate the virtual environment (deactivate)
 
 5. Install FLask
     - pip install flask
@@ -47,6 +48,10 @@ This is a simple Flask-based web application for managing events. Users can crea
 
 2. Running the application
     - flask run
+
+3. Access web application in the browser
+    - localhost:5000
+    (Flask app runs on port 5000)
 
 
 ## Application Structure
