@@ -24,16 +24,17 @@ This is a simple Flask-based web application for managing events. Users can crea
     - git clone https://github.com/ammbika/Seminar-Sphere.git
 
 3. Navigate to the project directory and create a new virtual environment
-       **Windows**
-    - python -m venv <env_name>
-        **macOS and Linux**
-    - python3 -m venv <env_name>
+   - **Windows**
+       python -m venv <env_name>
+   - **macOS and Linux**
+      python3 -m venv <env_name>
 
 5. Activate the virtual environment:
-        **Windows**
-    - <env_name>\Scripts\activate (For windows)
-       **macOS and Linux**
+   - **Windows**
+     <env_name>\Scripts\activate 
+   macOS and Linux
     - source <env_name>/bin/activate
+   
     - To deactivate the virtual environment (deactivate virtual env)
 
 7. Install FLask
