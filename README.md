@@ -32,7 +32,7 @@ This is a simple Flask-based web application for managing events. Users can crea
 5. Activate the virtual environment:
    - **Windows**
      <env_name>\Scripts\activate 
-   macOS and Linux
+  -  **macOS and Linux**
     - source <env_name>/bin/activate
    
     - To deactivate the virtual environment (deactivate virtual env)
@@ -48,7 +48,7 @@ This is a simple Flask-based web application for managing events. Users can crea
 1. Set the Flask app environment variable
     - ** Windows**
         set FLASK_APP = app.py
-    - ** macOS and Linux
+    - ** macOS and Linux**
         export FLASK_APP= app.py
 
 2. Running the application
