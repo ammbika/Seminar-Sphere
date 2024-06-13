@@ -1,9 +1,29 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 import json
 import uuid
+from datetime import datetime
 
 app= Flask(__name__)
 app.secret_key = 'gfy3o48046Gc7&^$hdjs'
+
+def validate_event_data(event_name, start_date, end_date, start_time, end_time, location, description):
+    if not event_name or not location or not description:
+        return False, "Event name, location, and description cannot be empty."
+
+    try:
+        start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
+        end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
+        start_time_obj = datetime.strptime(start_time, "%H:%M")
+        end_time_obj = datetime.strptime(end_time, "%H:%M")
+    except ValueError:
+        return False, "Invalid date or time format."
+
+    if start_date_obj > end_date_obj:
+        return False, "Start date cannot be after end date."
+    if start_time_obj >= end_time_obj and start_date_obj == end_date_obj:
+        return False, "Start time must be before end time on the same day."
+
+    return True, ""
 
 @app.route('/')
 def index():
@@ -74,6 +94,10 @@ def create_event():
             description = request.form['description']
             id = str(uuid.uuid4())
 
+            is_valid, error_message = validate_event_data(event_name, start_date, end_date, start_time, end_time, location, description)
+            if not is_valid:
+                return render_template('createEvent.html', failure_message=error_message)
+
             event = {
                 'event_name': event_name,
                 'start_date': start_date,
@@ -135,6 +159,11 @@ def edit_event(event_id):
                 event['end_time'] = request.form['end_time']
                 event['location'] = request.form['location']
                 event['description'] = request.form['description']
+
+                is_valid, error_message = validate_event_data(event['event_name'], event['start_date'], event['end_date'], event['start_time'], event['end_time'], event['location'], event['description'])
+                if not is_valid:
+                    return render_template('editEvent.html', event=event, failure_message=error_message)
+
 
                 try:
                     with open('events.json', 'w') as f:
