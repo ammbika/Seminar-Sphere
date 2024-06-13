@@ -3,9 +3,9 @@
 {% block content %}
 <div>
     <p>Are you sure you want to logout?</p>
-    <form action="{{ url_for('logout_decision') }}" method="post">
-        <input type="submit" name="decision" value="Yes">
-        <input type="submit" name="decision" value="No">
+    <form action="{{url_for('logout')}}" method="POST">
+        <button type="submit">Logout</button>
     </form>
+    <a href="/admin.html">No</a>
 </div>
 {% endblock %}

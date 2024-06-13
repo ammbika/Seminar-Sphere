@@ -8,6 +8,9 @@
 <div>
     <a href="{{ url_for('create_event') }}" class="button-link">Create Event</a>
 </div>
+<div>
+    <a href="{{url_for('search')}}" class="search-btn">Search</a>
+</div>
     <h2>Events</h2>
     <ul>
         {% for event in events %}

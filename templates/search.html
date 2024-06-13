@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Event Search</h1>
+        <form action="{{url_for('search_event')}}" method="GET">
+            <label for="event_name">Event Name:</label>
+            <input type="text" id="event_name" name="event_name"><br><br>
+            
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date"><br><br>
+            
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date"><br><br>
+            
+            <!-- Search button that submits the form -->
+            <button type="submit">Search</button>
+        </form>
+
+    <h2>Search Results</h2>
+        {% if events %}
+            <ul>
+            {% for event in events %}
+                <li>
+                    <h3>{{ event.event_name }}</h3>
+                    <p>Start Date: {{ event.start_date }}</p>
+                    <p>End Date: {{ event.end_date }}</p>
+                    <p>Start Time: {{ event.start_time }}</p>
+                    <p>End Time: {{ event.end_time }}</p>
+                    <p>Location: {{ event.location }}</p>
+                    <p>Description: {{ event.description }}</p>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No events found.</p>
+        {% endif %}
+{% endblock %}

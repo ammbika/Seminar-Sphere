@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request, make_response,  url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session
 import json
 import uuid
 
 app= Flask(__name__)
-
-app.secret_key = 'your_secret_key_here'
+app.secret_key = 'gfy3o48046Gc7&^$hdjs'
 
 @app.route('/')
 def index():
@@ -22,6 +21,7 @@ with open('credentials.json') as f:
 
 ADMIN_USERNAME = credentials['username']
 ADMIN_PASSWORD = credentials['password']
+failure_message = None
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -30,7 +30,7 @@ def login():
         password= request.form['password']
 
         if username!=ADMIN_USERNAME or password!= ADMIN_PASSWORD:
-            return "Invalid credentials", 401
+            return render_template('login.html', failure_message="Invalid credentials.")
         
         session['loggedIn'] = True
         return redirect(url_for('admin'))
@@ -51,18 +51,12 @@ def admin():
     return redirect(url_for('login'))
 
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET',"POST"])
 def logout():
-    return render_template('logout.html')
-
-@app.route('/logout_decision', methods=['POST'])
-def logout_decision():
-    decision= request.form['decision']
-    if decision == 'Yes':
+    if request.method=='POST':
         session.pop('loggedIn', None)
         return redirect(url_for('index'))
-    else:
-        return redirect(url_for('admin'))
+    return render_template('logout.html')
     
 @app.route('/create_event', methods=['GET', 'POST'])
 def create_event():
@@ -182,6 +176,34 @@ def delete_event(event_id):
         return render_template('deleteEvent.html',event_id=event_id)
     
     return redirect(url_for('login'))
+
+@app.route('/search')
+def search():
+    return render_template('search.html')
+    
+@app.route('/search_event', methods=['GET'])
+def search_event():
+    # Get search criteria from request args
+    event_name = request.args.get('event_name')
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+
+    try:
+        with open('events.json', 'r') as f:
+            events = json.load(f)
+    except FileNotFoundError:
+        events = []
+
+    # Filter events based on criteria
+    filtered_events = events
+    if event_name:
+        filtered_events = [event for event in filtered_events if event.get('event_name', '').lower() == event_name.lower()]
+    if start_date:
+        filtered_events = [event for event in filtered_events if event.get('start_date') == start_date]
+    if end_date:
+        filtered_events = [event for event in filtered_events if event.get('end_date') == end_date]
+
+    return render_template('search.html', events=filtered_events) 
 
 if __name__ == "__main__":
     app.run(debug=True)
