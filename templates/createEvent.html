@@ -29,20 +29,20 @@
     </form>
 
     {% if success_message %}
-    <div id="success-modal" >
-        <!--div style="background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px;"-->
-            <h3>{{ success_message }}</h3>
-            <button onclick="window.location.href='/admin'">OK</button>
-        <!--/div-->
-    </div>
+        <div id="success-modal" >
+            <!--div style="background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px;"-->
+                <h3>{{ success_message }}</h3>
+                <button onclick="window.location.href='/admin'">OK</button>
+            <!--/div-->
+        </div>
     {% endif %}
 
     {% if failure_message %}
-    <div id="failure-modal" >
-        <!--div style="background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px;"-->
-            <h3>{{ failure_message }}</h3>
-            <button onclick="window.location.href='/admin'">OK</button>
-        <!--/div-->
-    </div>
+        <div id="failure-modal" >
+            <!--div style="background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px;"-->
+                <h3>{{ failure_message }}</h3>
+                <button onclick="window.location.href='/admin'">OK</button>
+            <!--/div-->
+        </div>
     {% endif %}
     {% endblock %}
