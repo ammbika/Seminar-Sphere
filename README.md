@@ -20,30 +20,35 @@ This is a simple Flask-based web application for managing events. Users can crea
 
 1. Download python from official Python website: [Python Downloads](https://www.python.org/downloads/) and install it
 
-2. ** Clone the repository **
+2. Clone the repository 
     - git clone https://github.com/ammbika/Seminar-Sphere.git
 
 3. Navigate to the project directory and create a new virtual environment
-    - python -m venv <env_name>(For windows)
-    - python3 -m venv <env_name>(For macos and linux)
+   - **Windows**
+       python -m venv <env_name>
+   - **macOS and Linux**
+      python3 -m venv <env_name>
 
-4. Activate the virtual environment:
-    - <env_name>\Scripts\activate (For windows)
-    - source <env_name>/bin/activate
-    - To deactivate the virtual environment (deactivate)
+5. Activate the virtual environment:
+   - **Windows**
+     <env_name>\Scripts\activate 
+   -  **macOS and Linux**
+      source <env_name>/bin/activate
+   
+    - To deactivate the virtual environment (deactivate virtual env)
 
-5. Install FLask
+7. Install FLask
     - pip install flask
 
-6. Verify flask installation
+8. Verify flask installation
     - pip show flask
 
 ## Running the application
 
 1. Set the Flask app environment variable
-    - ** Windows**
+    - **Windows**
         set FLASK_APP = app.py
-    - ** macOS and Linux
+    - **macOS and Linux**
         export FLASK_APP= app.py
 
 2. Running the application
