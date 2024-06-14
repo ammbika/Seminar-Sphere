@@ -6,8 +6,8 @@ from datetime import datetime
 app= Flask(__name__)
 app.secret_key = 'gfy3o48046Gc7&^$hdjs'
 
-def validate_event_data(event_name, start_date, end_date, start_time, end_time, location, description):
-    if not event_name or not location or not description:
+def validate_event_data(title, start_date, end_date, start_time, end_time, location, description):
+    if not title or not location or not description:
         return False, "Event name, location, and description cannot be empty."
 
     try:
@@ -84,7 +84,7 @@ def create_event():
 
     if 'loggedIn' in session:
         if request.method == 'POST':
-            event_name = request.form['event_name']
+            title = request.form['title']
             start_date = request.form['start_date']
             end_date = request.form['end_date']
             start_time = request.form['start_time']
@@ -93,12 +93,12 @@ def create_event():
             description = request.form['description']
             id = str(uuid.uuid4())
 
-            is_valid, error_message = validate_event_data(event_name, start_date, end_date, start_time, end_time, location, description)
+            is_valid, error_message = validate_event_data(title, start_date, end_date, start_time, end_time, location, description)
             if not is_valid:
                 return render_template('createEvent.html', failure_message=error_message)
 
             event = {
-                'event_name': event_name,
+                'title': title,
                 'start_date': start_date,
                 'end_date': end_date,
                 'start_time': start_time,
@@ -149,7 +149,7 @@ def edit_event(event_id):
 
         if request.method == 'POST':
             if event:
-                event['event_name'] = request.form['event_name']
+                event['title'] = request.form['title']
                 event['start_date'] = request.form['start_date']
                 event['end_date'] = request.form['end_date']
                 event['start_time'] = request.form['start_time']
@@ -157,7 +157,7 @@ def edit_event(event_id):
                 event['location'] = request.form['location']
                 event['description'] = request.form['description']
 
-                is_valid, error_message = validate_event_data(event['event_name'], event['start_date'], event['end_date'], event['start_time'], event['end_time'], event['location'], event['description'])
+                is_valid, error_message = validate_event_data(event['title'], event['start_date'], event['end_date'], event['start_time'], event['end_time'], event['location'], event['description'])
                 if not is_valid:
                     return render_template('editEvent.html', event=event, failure_message=error_message)
 
@@ -210,7 +210,7 @@ def search():
 @app.route('/search_event', methods=['GET'])
 def search_event():
     # Get search criteria from request args
-    event_name = request.args.get('event_name')
+    title = request.args.get('title')
     start_date = request.args.get('start_date')
     end_date = request.args.get('end_date')
 
@@ -222,8 +222,8 @@ def search_event():
 
     # Filter events based on criteria
     filtered_events = events
-    if event_name:
-        filtered_events = [event for event in filtered_events if event.get('event_name', '').lower() == event_name.lower()]
+    if title:
+        filtered_events = [event for event in filtered_events if event.get('title', '').lower() == title.lower()]
     if start_date:
         filtered_events = [event for event in filtered_events if event.get('start_date') == start_date]
     if end_date:

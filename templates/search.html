@@ -15,8 +15,8 @@
             <h1>Event Search</h1>
             <form action="{{ url_for('search_event') }}" method="GET">
                 <div class="mb-3">
-                    <label for="event_name" class="form-label">Event Name:</label>
-                    <input type="text" id="event_name" name="event_name" class="form-control">
+                    <label for="title" class="form-label">Event Name:</label>
+                    <input type="text" id="title" name="title" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="start_date" class="form-label">Start Date:</label>
@@ -38,7 +38,7 @@
                 <ul class="list-group">
                 {% for event in events %}
                     <li class="list-group-item">
-                        <h3 class="mb-1">{{ event.event_name }}</h3>
+                        <h3 class="mb-1">{{ event.title }}</h3>
                         <p><strong>Start Date:</strong> {{ event.start_date }}</p>
                         <p><strong>End Date:</strong> {{ event.end_date }}</p>
                         <p><strong>Start Time:</strong> {{ event.start_time }}</p>
