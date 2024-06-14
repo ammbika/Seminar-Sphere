@@ -1,35 +1,44 @@
 {% extends "base.html" %}
 
 {% block nav_button %}
-    <a href="{{url_for('logout')}}" class="logout-btn">Logout</a>
+    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
 {% endblock %}
 
 {% block content %}
-<div>
-    <a href="{{ url_for('create_event') }}" class="button-link">Create Event</a>
-</div>
-<div>
-    <a href="{{url_for('search')}}" class="search-btn">Search</a>
-</div>
-    <h2>Events</h2>
-    <ul>
+    <div class="mb-3">
+        <a href="{{ url_for('create_event') }}" class="btn btn-primary">Create Event</a>
+    </div>
+    <div class="mb-3">
+        <a href="{{ url_for('search') }}" class="btn btn-secondary">Search</a>
+    </div>
+    <h2 class="mt-4">Events</h2>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
         {% for event in events %}
-        <li>
-            <strong>Event Name:</strong> {{ event.event_name }}<br>
-            <strong>Start Date:</strong> {{ event.start_date }}<br>
-            <strong>End Date:</strong> {{ event.end_date }}<br>
-            <strong>Start Time:</strong> {{ event.start_time }}<br>
-            <strong>End Time:</strong> {{ event.end_time }}<br>
-            <strong>Location:</strong> {{ event.location }}<br>
-            <strong>Description:</strong> {{ event.description }}<br>
-            <a href="{{ url_for('edit_event', event_id=event.id) }}">Edit</a>
-            <a href="{{ url_for('delete_event', event_id=event.id) }}">Delete</a>
-            <br>
-        </li>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.event_name }}</h5>
+                    <p class="card-text">
+                        <strong>Start Date:</strong> {{ event.start_date }}<br>
+                        <strong>End Date:</strong> {{ event.end_date }}<br>
+                        <strong>Start Time:</strong> {{ event.start_time }}<br>
+                        <strong>End Time:</strong> {{ event.end_time }}<br>
+                        <strong>Location:</strong> {{ event.location }}<br>
+                        <strong>Description:</strong> {{ event.description }}<br>
+                    </p>
+                    <a href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-primary me-2">Edit</a>
+                    <a href="{{ url_for('delete_event', event_id=event.id) }}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
         {% else %}
-        <li>No events found.</li>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <p>No events found.</p>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
-
+    </div>
 {% endblock %}
-

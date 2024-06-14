@@ -80,7 +80,6 @@ def logout():
     
 @app.route('/create_event', methods=['GET', 'POST'])
 def create_event():
-    success_message = None
     failure_message = None
 
     if 'loggedIn' in session:
@@ -125,10 +124,9 @@ def create_event():
             except IOError:
                 return render_template('createEvent.html', failure_message="Error: Unable to write events to file.")
 
-            # Set success message
-            success_message = "Event created successfully!"
-
-            return render_template('createEvent.html', success_message=success_message, failure_message=failure_message)
+            if not failure_message:
+                    return redirect(url_for('admin'))
+            return render_template('createEvent.html', failure_message=failure_message)
 
         return render_template('createEvent.html')
 
@@ -232,6 +230,7 @@ def search_event():
         filtered_events = [event for event in filtered_events if event.get('end_date') == end_date]
 
     return render_template('search.html', events=filtered_events) 
+
 
 if __name__ == "__main__":
     app.run(debug=True)

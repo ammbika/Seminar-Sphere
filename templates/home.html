@@ -1,28 +1,37 @@
 {% extends "base.html" %}
 
 {% block nav_button %}
-    <a href="{{url_for('login')}}" class="login-btn">LogIn</a>  
+    <a href="{{url_for('login')}}" class="btn btn-primary">LogIn</a>  
 {% endblock %}
 
 {% block content %}
-    <div>
-        <a href="{{url_for('search')}}" class="search-btn">Search</a>
+    <div class="container mt-4">
+        <div class="mb-3">
+            <a href="{{url_for('search')}}" class="btn btn-secondary">Search</a>
+        </div>
+        <h2>Events</h2>
+        <div class="row">
+            {% for event in events %}
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: blue;">{{ event.event_name }}</h5>
+                        <p class="card-text"><strong>Start Date:</strong> {{ event.start_date }}</p>
+                        <p class="card-text"><strong>End Date:</strong> {{ event.end_date }}</p>
+                        <p class="card-text"><strong>Start Time:</strong> {{ event.start_time }}</p>
+                        <p class="card-text"><strong>End Time:</strong> {{ event.end_time }}</p>
+                        <p class="card-text"><strong>Location:</strong> {{ event.location }}</p>
+                        <p class="card-text"><strong>Description:</strong> {{ event.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12">
+                <div class="alert alert-warning" role="alert">
+                    No events found.
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-    <h2>Events</h2>
-    <ul>
-        {% for event in events %}
-        <li>
-            <strong>Event Name:</strong> {{ event.event_name }}<br>
-            <strong>Start Date:</strong> {{ event.start_date }}<br>
-            <strong>End Date:</strong> {{ event.end_date }}<br>
-            <strong>Start Time:</strong> {{ event.start_time }}<br>
-            <strong>End Time:</strong> {{ event.end_time }}<br>
-            <strong>Location:</strong> {{ event.location }}<br>
-            <strong>Description:</strong> {{ event.description }}<br>
-            <br>
-        </li>
-        {% else %}
-        <li>No events found.</li>
-        {% endfor %}
-    </ul>
 {% endblock %}

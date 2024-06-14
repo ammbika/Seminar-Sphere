@@ -1,48 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Fill in the details</h1>
-    <form action="{{url_for('create_event')}}" method="POST">
-        <label for="event_name">Event Name:</label><br>
-        <input type="text" id="event_name" name="event_name" required><br><br>
+<div class="container">
+    <h1 class="mb-4">Fill in the details</h1>
+    <form action="{{ url_for('create_event') }}" method="POST" class="mb-4">
+        <div class="mb-3">
+            <label for="event_name" class="form-label">Event Name:</label>
+            <input type="text" id="event_name" name="event_name" class="form-control" required>
+        </div>
         
-        <label for="start_date">Start Date:</label><br>
-        <input type="date" id="start_date" name="start_date" required><br><br>
+        <div class="mb-3">
+            <label for="start_date" class="form-label">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" class="form-control" required>
+        </div>
         
-        <label for="end_date">End Date:</label><br>
-        <input type="date" id="end_date" name="end_date" required><br><br>
+        <div class="mb-3">
+            <label for="end_date" class="form-label">End Date:</label>
+            <input type="date" id="end_date" name="end_date" class="form-control" required>
+        </div>
         
-        <label for="start_time">Start Time:</label><br>
-        <input type="time" id="start_time" name="start_time" required><br><br>
+        <div class="mb-3">
+            <label for="start_time" class="form-label">Start Time:</label>
+            <input type="time" id="start_time" name="start_time" class="form-control" required>
+        </div>
         
-        <label for="end_time">End Time:</label><br>
-        <input type="time" id="end_time" name="end_time" required><br><br>
+        <div class="mb-3">
+            <label for="end_time" class="form-label">End Time:</label>
+            <input type="time" id="end_time" name="end_time" class="form-control" required>
+        </div>
         
-        <label for="location">Location:</label><br>
-        <input type="text" id="location" name="location" required><br><br>
+        <div class="mb-3">
+            <label for="location" class="form-label">Location:</label>
+            <input type="text" id="location" name="location" class="form-control" required>
+        </div>
         
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" required></textarea><br><br>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea id="description" name="description" class="form-control" rows="3" required></textarea>
+        </div>
         
-        <input type="submit" value="Submit">
-        <a href="/admin" class="button-link">Cancel</a>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/admin" class="btn btn-secondary ms-2">Cancel</a>
+        </div>
     </form>
 
-    {% if success_message %}
-        <div id="success-modal" >
-            <!--div style="background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px;"-->
-                <h3>{{ success_message }}</h3>
-                <button onclick="window.location.href='/admin'">OK</button>
-            <!--/div-->
-        </div>
-    {% endif %}
-
     {% if failure_message %}
-        <div id="failure-modal" >
-            <!--div style="background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px;"-->
-                <h3>{{ failure_message }}</h3>
-                <button onclick="window.location.href='/admin'">OK</button>
-            <!--/div-->
-        </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">{{ failure_message }}</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     {% endif %}
-    {% endblock %}
+</div>
+{% endblock %}

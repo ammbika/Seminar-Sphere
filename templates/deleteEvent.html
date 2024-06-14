@@ -1,18 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Are you sure you want to delete this event?</h2>
-    <form action="{{ url_for('delete_event', event_id=event_id) }}" method="POST">
-        <button type="submit">Yes</button>
-        <a href="{{ url_for('admin') }}">No</a>
-    </form>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Confirm delete?</h2>
+                    <form action="{{ url_for('delete_event', event_id=event_id) }}" method="POST">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-danger me-2">Yes</button>
+                            <a href="{{ url_for('admin') }}" class="btn btn-secondary">No</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {% if failure_message %}
-        <div id="failure-modal" >
-            <!--div style="background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px;"-->
-                <h3>{{ failure_message }}</h3>
-                <button onclick="window.location.href='/admin'">OK</button>
-            <!--/div-->
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">{{ failure_message }}</h4>
+                <button type="button" class="btn btn-outline-danger" onclick="window.location.href='/admin'">OK</button>
+            </div>
         </div>
+    </div>
     {% endif %}
+</div>
 {% endblock %}
