@@ -6,14 +6,6 @@
         <button type="submit">Yes</button>
         <a href="{{ url_for('admin') }}">No</a>
     </form>
-    {% if success_message %}
-        <div id="success-modal" >
-            <!--div style="background-color: #f0f0f0; border: 1px solid #ccc; padding: 10px;"-->
-                <h3>{{ success_message }}</h3>
-                <button onclick="window.location.href='/admin'">OK</button>
-            <!--/div-->
-        </div>
-    {% endif %}
 
     {% if failure_message %}
         <div id="failure-modal" >

@@ -138,7 +138,6 @@ def create_event():
 @app.route('/edit_event/<event_id>', methods=['GET', 'POST'])
 def edit_event(event_id):
     if 'loggedIn' in session:
-        success_message = None
         failure_message = None
         try:
             with open('events.json', 'r') as f:
@@ -170,8 +169,9 @@ def edit_event(event_id):
                         json.dump(events, f, indent=4)
                 except IOError:
                     return render_template('editEvent.html', failure_message="Error: Unable to write events to file.")
-                success_message = "Event updated successfully!"
-                return render_template('editEvent.html',event=event, success_message=success_message, failure_message=failure_message)
+                if not failure_message:
+                    return redirect(url_for('admin'))
+                return render_template('editEvent.html',event=event, failure_message=failure_message)
     
         return render_template('editEvent.html', event=event)
 
@@ -181,7 +181,6 @@ def edit_event(event_id):
 @app.route('/delete_event/<event_id>', methods=['GET','POST'])
 def delete_event(event_id):
     if 'loggedIn' in session:
-        success_message = None
         failure_message = None
         if request.method =='POST':
             try:
@@ -199,9 +198,9 @@ def delete_event(event_id):
                     json.dump(events, f, indent=4)
             except IOError:
                 return render_template('deleteEvent.html', failure_message="Error: Unable to write events to file.")
-            success_message = "Event deleted successfully!"
-            return render_template('deleteEvent.html', success_message=success_message, failure_message=failure_message)
-    
+            if not failure_message:
+                return redirect(url_for('admin'))
+            return render_template('deleteEvent.html', failure_message=failure_message)
         return render_template('deleteEvent.html',event_id=event_id)
     
     return redirect(url_for('login'))
