@@ -17,13 +17,14 @@
         <div class="col">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">{{ event.title }}</h5>
+                    <h5 class="card-title" style="color: blue; font-weight: bold;">{{ event.title }}</h5>
                     <p class="card-text">
                         <strong>Start Date:</strong> {{ event.start_date }}<br>
                         <strong>End Date:</strong> {{ event.end_date }}<br>
                         <strong>Start Time:</strong> {{ event.start_time }}<br>
                         <strong>End Time:</strong> {{ event.end_time }}<br>
                         <strong>Location:</strong> {{ event.location }}<br>
+                        <strong>Participants:</strong> {{ event.participants }}<br>
                         <strong>Description:</strong> {{ event.description }}<br>
                     </p>
                     <a href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-primary me-2">Edit</a>

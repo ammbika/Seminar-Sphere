@@ -1,55 +1,64 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <h2 class="mb-4">Edit Event</h2>
-    <form action="{{ url_for('edit_event', event_id=event.id) }}" method="POST" class="mb-4">
-        <div class="mb-3">
-            <label for="title" class="form-label">Event Name:</label>
-            <input type="text" id="title" name="title" value="{{ event.title }}" class="form-control" required>
+<div class="container-md">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="mb-4">Edit Event</h2>
+            <form action="{{ url_for('edit_event', event_id=event.id) }}" method="POST" class="mb-4" onsubmit="return validateForm()">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Event Name:</label>
+                    <input type="text" id="title" name="title" value="{{ event.title }}" class="form-control" required>
+                    <span id="titleError" class="error text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="start_date" class="form-label">Start Date:</label>
+                    <input type="date" id="start_date" name="start_date" value="{{ event.start_date }}" class="form-control" required>
+                    <span id="startDateError" class="error text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="end_date" class="form-label">End Date:</label>
+                    <input type="date" id="end_date" name="end_date" value="{{ event.end_date }}" class="form-control" required>
+                    <span id="endDateError" class="error text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="start_time" class="form-label">Start Time:</label>
+                    <input type="time" id="start_time" name="start_time" value="{{ event.start_time }}" class="form-control" required>
+                    <span id="startTimeError" class="error text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="end_time" class="form-label">End Time:</label>
+                    <input type="time" id="end_time" name="end_time" value="{{ event.end_time }}" class="form-control" required>
+                    <span id="endTimeError" class="error text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location:</label>
+                    <input type="text" id="location" name="location" value="{{ event.location }}" class="form-control" required>
+                    <span id="locationError" class="error text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="participants" class="form-label">Number of Participants:</label>
+                    <input type="number" id="participants" name="participants" value="{{ event.participants }}" class="form-control" required>
+                    <span id="participantsError" class="error text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea id="description" name="description" class="form-control" rows="3" required>{{ event.description }}</textarea>
+                    <span id="descriptionError" class="error text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary me-2">Update</button>
+                    <a href="{{ url_for('admin') }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+            {% if failure_message %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">{{ failure_message }}</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
         </div>
-        
-        <div class="mb-3">
-            <label for="start_date" class="form-label">Start Date:</label>
-            <input type="date" id="start_date" name="start_date" value="{{ event.start_date }}" class="form-control" required>
-        </div>
-        
-        <div class="mb-3">
-            <label for="end_date" class="form-label">End Date:</label>
-            <input type="date" id="end_date" name="end_date" value="{{ event.end_date }}" class="form-control" required>
-        </div>
-        
-        <div class="mb-3">
-            <label for="start_time" class="form-label">Start Time:</label>
-            <input type="time" id="start_time" name="start_time" value="{{ event.start_time }}" class="form-control" required>
-        </div>
-        
-        <div class="mb-3">
-            <label for="end_time" class="form-label">End Time:</label>
-            <input type="time" id="end_time" name="end_time" value="{{ event.end_time }}" class="form-control" required>
-        </div>
-        
-        <div class="mb-3">
-            <label for="location" class="form-label">Location:</label>
-            <input type="text" id="location" name="location" value="{{ event.location }}" class="form-control" required>
-        </div>
-        
-        <div class="mb-3">
-            <label for="description" class="form-label">Description:</label>
-            <textarea id="description" name="description" class="form-control" rows="3" required>{{ event.description }}</textarea>
-        </div>
-        
-        <div class="mb-3">
-            <button type="submit" class="btn btn-primary me-2">Update</button>
-            <a href="{{ url_for('admin') }}" class="btn btn-secondary">Cancel</a>
-        </div>
-    </form>
-
-    {% if failure_message %}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <h4 class="alert-heading">{{ failure_message }}</h4>
-        <button type="button" class="btn btn-outline-danger" onclick="window.location.href='/admin'">OK</button>
     </div>
-    {% endif %}
 </div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}

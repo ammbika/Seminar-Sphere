@@ -6,7 +6,7 @@ from datetime import datetime
 app= Flask(__name__)
 app.secret_key = 'gfy3o48046Gc7&^$hdjs'
 
-def validate_event_data(title, start_date, end_date, start_time, end_time, location, description):
+def validate_event_data(title, start_date, end_date, start_time, end_time, location,participants, description):
     if not title or not location or not description:
         return False, "Event name, location, and description cannot be empty."
 
@@ -22,6 +22,13 @@ def validate_event_data(title, start_date, end_date, start_time, end_time, locat
         return False, "Start date cannot be after end date."
     if start_time_obj >= end_time_obj and start_date_obj == end_date_obj:
         return False, "Start time must be before end time on the same day."
+    
+    try:
+        participants = int(participants)
+        if participants < 1:
+            return False, "Number of participants must be at least 1."
+    except ValueError:
+        return False, "Invalid number of participants."
 
     return True, ""
 
@@ -90,10 +97,11 @@ def create_event():
             start_time = request.form['start_time']
             end_time = request.form['end_time']
             location = request.form['location']
+            participants = request.form['participants']
             description = request.form['description']
             id = str(uuid.uuid4())
 
-            is_valid, error_message = validate_event_data(title, start_date, end_date, start_time, end_time, location, description)
+            is_valid, error_message = validate_event_data(title, start_date, end_date, start_time, end_time, location,participants, description)
             if not is_valid:
                 return render_template('createEvent.html', failure_message=error_message)
 
@@ -104,6 +112,7 @@ def create_event():
                 'start_time': start_time,
                 'end_time': end_time,
                 'location': location,
+                'participants': participants,
                 'description': description,
                 'id':id
             }
@@ -155,9 +164,10 @@ def edit_event(event_id):
                 event['start_time'] = request.form['start_time']
                 event['end_time'] = request.form['end_time']
                 event['location'] = request.form['location']
+                event['participants'] = request.form['participants']
                 event['description'] = request.form['description']
 
-                is_valid, error_message = validate_event_data(event['title'], event['start_date'], event['end_date'], event['start_time'], event['end_time'], event['location'], event['description'])
+                is_valid, error_message = validate_event_data(event['title'], event['start_date'], event['end_date'], event['start_time'], event['end_time'], event['location'], event['participants'], event['description'])
                 if not is_valid:
                     return render_template('editEvent.html', event=event, failure_message=error_message)
 
