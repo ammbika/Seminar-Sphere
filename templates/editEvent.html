@@ -7,7 +7,7 @@
             <h2 class="mb-4">Edit Event</h2>
             <form action="{{ url_for('edit_event', event_id=event.id) }}" method="POST" class="mb-4" onsubmit="return validateForm()">
                 <div class="mb-3">
-                    <label for="title" class="form-label">Event Name:</label>
+                    <label for="title" class="form-label">Title:</label>
                     <input type="text" id="title" name="title" value="{{ event.title }}" class="form-control" required>
                     <span id="titleError" class="error text-danger"></span>
                 </div>

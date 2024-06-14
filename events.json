@@ -1,62 +1,57 @@
 [
     {
-        "event_name": "Female hackathon",
-        "start_date": "2024-06-12",
-        "end_date": "2024-06-13",
-        "start_time": "21:30",
-        "end_time": "22:30",
-        "location": "kathmandu",
-        "description": "ffhcieufbh",
-        "id": "89acd324-9145-40d5-8c39-4ac6406e5c14"
+        "title": "Sustainable Urban Development: Innovations and Challenges",
+        "start_date": "2024-06-16",
+        "end_date": "2024-06-18",
+        "start_time": "00:15",
+        "end_time": "16:30",
+        "location": "Green Technology Institute, Stockholm, Sweden",
+        "participants": "100",
+        "description": "Delve into sustainable practices shaping urban landscapes worldwide, examining innovations in architecture, energy efficiency, and community engagement.",
+        "id": "d5ef7bbf-8067-464f-a01a-ab6d20fb77d5"
     },
     {
-        "event_name": "AI seminar",
-        "start_date": "2024-06-13",
-        "end_date": "2024-06-14",
-        "start_time": "21:44",
-        "end_time": "22:44",
-        "location": "kathmandu",
-        "description": "irhvbagehyrbgfw;eihfnb eavzds",
-        "id": "ac75f120-5692-4a38-8086-72d6fcb090ed"
+        "title": "Blockchain and Beyond: Emerging Technologies Reshaping Finance",
+        "start_date": "2024-06-26",
+        "end_date": "2024-06-28",
+        "start_time": "11:00",
+        "end_time": "14:30",
+        "location": "Financial District, Singapore",
+        "participants": "120",
+        "description": "Discover how blockchain technology is disrupting traditional financial systems and its potential applications beyond cryptocurrencies, including supply chain and voting systems.",
+        "id": "ea462b87-517b-4b17-9a47-f0cc35233fd9"
     },
     {
-        "event_name": "event",
-        "start_date": "2024-06-14",
-        "end_date": "2024-06-15",
-        "start_time": "14:58",
-        "end_time": "16:58",
-        "location": "ktm",
-        "description": "dhguehjbvgsf",
-        "id": "a4808234-1998-4b9c-a21f-eda74610fe54"
+        "title": "Climate Change and Global Food Security",
+        "start_date": "2024-06-17",
+        "end_date": "2024-06-17",
+        "start_time": "10:00",
+        "end_time": "14:30",
+        "location": "Environmental Research Institute, Nairobi, Kenya",
+        "participants": "100",
+        "description": "Analyze the impact of climate change on global food production and explore innovative solutions for ensuring food security amidst environmental challenges.",
+        "id": "aad3dab7-342a-465a-b934-6403b4698d6c"
     },
     {
-        "event_name": "Dance mela",
-        "start_date": "2024-06-21",
-        "end_date": "2024-06-22",
-        "start_time": "15:01",
-        "end_time": "15:01",
-        "location": "pokhara",
-        "description": "hsdvywvu czgsyd",
-        "id": "05182f9f-c2ce-49fb-8958-ab48c239e924"
+        "title": "Ethics in AI: Navigating Bias and Accountability",
+        "start_date": "2024-06-30",
+        "end_date": "2024-07-01",
+        "start_time": "11:00",
+        "end_time": "15:30",
+        "location": "Ethics Institute, Amsterdam, Netherlands",
+        "participants": "175",
+        "description": "Discuss ethical considerations in the development and deployment of artificial intelligence systems, focusing on mitigating biases and ensuring accountability.",
+        "id": "ad2c5530-e5e2-4874-b8f0-4c689b14ccaa"
     },
     {
-        "event_name": "Music Festival",
-        "start_date": "2024-06-15",
-        "end_date": "2024-06-26",
-        "start_time": "15:02",
-        "end_time": "15:02",
-        "location": "kathmandu",
-        "description": "jxbdfuq3gbya",
-        "id": "4eec2594-fdce-48ed-9db2-7abd4a51ba75"
-    },
-    {
-        "event_name": "Singing mela",
-        "start_date": "2024-06-14",
-        "end_date": "2024-06-15",
-        "start_time": "15:24",
-        "end_time": "15:24",
-        "location": "chitwan",
-        "description": "djhfwore8fugebh",
-        "id": "e0df9bec-2a29-4ce2-9190-ce024c769b3e"
+        "title": "Digital Transformation in Education",
+        "start_date": "2024-07-03",
+        "end_date": "2024-07-03",
+        "start_time": "10:20",
+        "end_time": "14:20",
+        "location": "Educational Technology Center, Sydney, Australia",
+        "participants": "127",
+        "description": "Explore the role of technology in transforming educational practices, from virtual classrooms to adaptive learning systems, and its implications for future generations.",
+        "id": "ff2a3619-68f3-431e-b348-35c69df5c253"
     }
 ]
