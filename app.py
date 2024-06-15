@@ -6,6 +6,12 @@ from datetime import datetime
 app= Flask(__name__)
 app.secret_key = 'gfy3o48046Gc7&^$hdjs'
 
+def parse_time(time_str):
+    try:
+        return datetime.strptime(time_str, '%H:%M').time()
+    except ValueError:
+        return None
+
 def validate_event_data(title, start_date, end_date, start_time, end_time, location,participants, description):
     if not title or not location or not description:
         return False, "Event name, location, and description cannot be empty."
@@ -13,15 +19,21 @@ def validate_event_data(title, start_date, end_date, start_time, end_time, locat
     try:
         start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
         end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
-        start_time_obj = datetime.strptime(start_time, "%H:%M")
-        end_time_obj = datetime.strptime(end_time, "%H:%M")
     except ValueError:
         return False, "Invalid date or time format."
+    
+    try:
+        start_time_obj = parse_time(start_time)
+        end_time_obj = parse_time(end_time)
+        if not start_time_obj or not end_time_obj:
+            raise ValueError("Invalid time format")
+    except ValueError:
+        return False, "Invalid time format."
 
     if start_date_obj > end_date_obj:
         return False, "Start date cannot be after end date."
-    if start_time_obj >= end_time_obj and start_date_obj == end_date_obj:
-        return False, "Start time must be before end time on the same day."
+    if end_time_obj <= start_time_obj:
+        return False, "End time must be after start time."
     
     try:
         participants = int(participants)
@@ -233,7 +245,7 @@ def search_event():
     # Filter events based on criteria
     filtered_events = events
     if title:
-        filtered_events = [event for event in filtered_events if event.get('title', '').lower() == title.lower()]
+        filtered_events = [event for event in filtered_events if title.lower() in event.get('title', '').lower()]
     if start_date:
         filtered_events = [event for event in filtered_events if event.get('start_date') == start_date]
     if end_date:

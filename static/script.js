@@ -33,15 +33,20 @@ function validateForm() {
     if (startTime.trim() === '') {
         document.getElementById('startTimeError').innerHTML = 'Start time is required';
         hasError = true;
+    } else if (!validateTimeFormat(startTime)) {
+        document.getElementById('startTimeError').innerHTML = 'Invalid time format. Use HH:mm 24 hour format';
+        hasError = true;
     }
-
     // End time validation
     var endTime = document.getElementById('end_time').value;
     if (endTime.trim() === '') {
         document.getElementById('endTimeError').innerHTML = 'End time is required';
         hasError = true;
-    } else if (startDate === endDate && endTime < startTime) {
-        document.getElementById('endTimeError').innerHTML = 'End time cannot be before start time on the same day';
+    } else if (!validateTimeFormat(endTime)) {
+        document.getElementById('endTimeError').innerHTML = 'Invalid time format. Use HH:mm 24 hour format';
+        hasError = true;
+    } else if (!isEndTimeAfterStartTime(startTime, endTime)) {
+        document.getElementById('endTimeError').innerHTML = 'End time must be after start time. Use 24 hour format';
         hasError = true;
     }
 
@@ -70,4 +75,26 @@ function validateForm() {
     }
 
     return !hasError;
+}
+
+function validateTimeFormat(timeString) {
+    var regex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    return regex.test(timeString);
+}
+
+function isEndTimeAfterStartTime(startTime, endTime) {
+    var startTimeParts = startTime.split(':');
+    var endTimeParts = endTime.split(':');
+
+    var startHour = parseInt(startTimeParts[0], 10);
+    var startMinute = parseInt(startTimeParts[1], 10);
+    var endHour = parseInt(endTimeParts[0], 10);
+    var endMinute = parseInt(endTimeParts[1], 10);
+
+    if (endHour > startHour) {
+        return true;
+    } else if (endHour === startHour && endMinute > startMinute) {
+        return true;
+    }
+    return false;
 }

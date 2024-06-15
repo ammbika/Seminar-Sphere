@@ -15,7 +15,7 @@
             <h1>Event Search</h1>
             <form action="{{ url_for('search_event') }}" method="GET">
                 <div class="mb-3">
-                    <label for="title" class="form-label">Event Name:</label>
+                    <label for="title" class="form-label">Title:</label>
                     <input type="text" id="title" name="title" class="form-control">
                 </div>
                 <div class="mb-3">
@@ -32,31 +32,37 @@
     </div>
 
     <div class="row mt-4">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <h2>Search Results</h2>
             {% if events %}
-                <ul class="list-group">
-                {% for event in events %}
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title" style="color: blue;">{{ event.title }}</h5>
-                            <p class="card-text"><strong>Start Date:</strong> {{ event.start_date }}</p>
-                            <p class="card-text"><strong>End Date:</strong> {{ event.end_date }}</p>
-                            <p class="card-text"><strong>Start Time:</strong> {{ event.start_time }}</p>
-                            <p class="card-text"><strong>End Time:</strong> {{ event.end_time }}</p>
-                            <p class="card-text"><strong>Location:</strong> {{ event.location }}</p>
-                            <p class="card-text"><strong>Participants:</strong> {{ event.participants }}</p>
-                            <p class="card-text"><strong>Description:</strong> {{ event.description }}</p>
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for event in events %}
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: blue; font-weight: bold;">{{ event.title }}</h5>
+                                <p class="card-text">
+                                    <strong>Start Date:</strong> {{ event.start_date }}<br>
+                                    <strong>End Date:</strong> {{ event.end_date }}<br>
+                                    <strong>Start Time:</strong> {{ event.start_time }}<br>
+                                    <strong>End Time:</strong> {{ event.end_time }}<br>
+                                    <strong>Location:</strong> {{ event.location }}<br>
+                                    <strong>Participants:</strong> {{ event.participants }}<br>
+                                    <strong>Description:</strong> {{ event.description }}<br>
+                                </p>
+                                {% if logged_in %}
+                                    <a href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-primary me-2">Edit</a>
+                                    <a href="{{ url_for('delete_event', event_id=event.id) }}" class="btn btn-danger">Delete</a>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-                </ul>
             {% else %}
                 <p>No events found.</p>
             {% endif %}
         </div>
-    </div>
+    </div>    
 </div>
 {% endblock %}
